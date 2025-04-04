@@ -1,26 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css" />
-    <title>Summarist Home Page</title>
-  </head>
-  <body>
-    <nav class="nav">
-      <div class="nav__wrapper">
-        <figure class="nav__img--mask">
-          <img class="nav__img" src="" alt="logo" />
-        </figure>
-        <ul class="nav__list--wrapper">
-          <li class="nav__list nav__list--login">Login</li>
-          <li class="nav__list nav__list--mobile">About</li>
-          <li class="nav__list nav__list--mobile">Contact</li>
-          <li class="nav__list nav__list--mobile">Help</li>
-        </ul>
-      </div>
-    </nav>
+import React from 'react'
+import { AiFillAudio, AiFillBulb, AiFillFileText } from 'react-icons/ai'
+import { BiCrown } from 'react-icons/bi'
+import { BsStarFill, BsStarHalf } from 'react-icons/bs'
+import { RiLeafLine } from 'react-icons/ri'
+import landing from '../assets/landing.png'
+
+const Home = () => {
+  return (
+ <>
     <section id="landing">
       <div class="container">
         <div class="row">
@@ -40,7 +27,7 @@
               <button class="btn home__cta--btn">Login</button>
             </div>
             <figure class="landing__image--mask">
-              <img src="" alt="landing" />
+              <img src={landing} alt="landing" />
             </figure>
           </div>
         </div>
@@ -121,8 +108,8 @@
               <div class="statistics__data">
                 <div class="statistics__data--number">91%</div>
                 <div class="statistics__data--title">
-                  of Summarist members <b>report feeling more productive</b>{"
-                  "} after incorporating the service into their daily routine.
+                  of Summarist members <b>report feeling more productive</b>
+                  after incorporating the service into their daily routine.
                 </div>
               </div>
               <div class="statistics__data">
@@ -336,5 +323,8 @@
         </div>
       </div>
     </section>
-  </body>
-</html>
+    </>
+  )
+}
+
+export default Home
