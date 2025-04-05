@@ -1,5 +1,3 @@
-
-import './App.css';
 import Home from './pages/Home';
 import Navbar from './Components/Navbar';
 import Modal from './Components/Modal';
