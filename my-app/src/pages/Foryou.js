@@ -1,16 +1,22 @@
-import React from 'react'
+import React from 'react';
 import { useAuth } from '../AuthContext';
-
-
+import { useNavigate } from 'react-router-dom';
+const navigate= useNavigate();
 
 const Foryou = () => {
-  const user = useAuth();
-   console.log(user)
-  return (
-    <div>
-    Logged In As: {user}
-    </div>
-  )
-}
+    const { currentUser } = useAuth();
 
-export default Foryou
+    return (
+        <div>
+            {currentUser ? (
+                <div>
+                    Logged In As: {currentUser.email}
+                </div>
+            ) : (
+                navigate('/')
+            )}
+        </div>
+    );
+};
+
+export default Foryou;

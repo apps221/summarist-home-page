@@ -5,6 +5,7 @@ import { IoIosClose } from "react-icons/io";
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
 //Email: guest@gmail.com
 //Password: guest123
 
@@ -13,6 +14,7 @@ const Modal = ({closeModal}) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate= useNavigate();
+  const {currentUser} = useAuth();
 
   
   const signIn = (e) => {
@@ -20,7 +22,7 @@ const Modal = ({closeModal}) => {
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       console.log(userCredential)
-      navigate('/for-you');
+    
     }).catch((error) => {
       console.log(error)
       const errorMessage = error.message;
@@ -42,6 +44,11 @@ const Modal = ({closeModal}) => {
 
       });
   };
+  useEffect(()=> {
+    if (currentUser) {
+      navigate('/for-you')
+    }
+  }, [currentUser, navigate])
   return (
     <div className="auth__wrapper">
     <div className="auth">
