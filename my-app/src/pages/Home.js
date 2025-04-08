@@ -7,10 +7,17 @@ import landing from '../assets/landing.png'
 import Modal from '../Components/Modal'
 
 const Home = () => {
-    const [modalOpen, setModalOpen] = useState('false');
-    const closeModal = () => {
-      setModalOpen(false);
+
+  const [modalOpenLanding, setModalOpenLanding] = useState(false);
+    const [modalOpenReviews, setModalOpenReviews] = useState(false);
+
+    const closeModalLanding = () => {
+      setModalOpenLanding(false);
     }
+    const closeModalReviews = () => {
+      setModalOpenReviews(false);
+    }
+  
   return (
  <>
     <section id="landing">
@@ -29,8 +36,8 @@ const Home = () => {
                 <br class="remove--tablet" />
                 and even people who don’t like to read.
               </div>
-              <button class="btn home__cta--btn" onClick={()=> setModalOpen(true)}>Login</button>
-              {modalOpen && <Modal closeModal={closeModal}/>}
+              <button class="btn home__cta--btn" onClick={()=> setModalOpenLanding(true)}>Login</button>
+              {modalOpenLanding && <Modal closeModal={closeModalLanding}/>}
             </div>
             <figure class="landing__image--mask">
               <img src={landing} alt="landing" />
@@ -208,8 +215,8 @@ const Home = () => {
             </div>
           </div>
           <div class="reviews__btn--wrapper">
-            <button class="btn home__cta--btn" onClick={()=> setModalOpen(true)}>Login</button>
-            {modalOpen && <Modal closeModal={closeModal}/>}
+            <button class="btn home__cta--btn" onClick={()=> setModalOpenReviews(true)}>Login</button>
+            {modalOpenReviews && <Modal closeModal={closeModalReviews}/>}
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { VscAccount } from "react-icons/vsc";
 import google from '../assets/google.png'
 import { IoIosClose } from "react-icons/io";
@@ -8,6 +8,9 @@ const Modal = ({closeModal}) => {
     <div className="auth__wrapper">
     <div className="auth">
         <div className="auth__content">
+        <div className="close__btn" onClick={closeModal}>
+            <IoIosClose />
+            </div>
           {signState==="Log In" ?
           <>
           <div className="auth__title">Log in to Summarist</div>
@@ -31,9 +34,6 @@ const Modal = ({closeModal}) => {
               </input>
               <button class="btn">Login</button>
             </form><div className="forgot__password">Forgot Password?</div> 
-            <div className="close__btn" onClick={closeModal}>
-            <IoIosClose />
-            </div>
             <div onClick = {() => {setSignState("Sign Up")}} className="signUp" >Sign Up</div></> : 
             
             <>
@@ -52,9 +52,6 @@ const Modal = ({closeModal}) => {
               </input>
               <button class="btn">Sign Up</button>
             </form>
-            <div className="close__btn" onClick={closeModal}>
-            <IoIosClose />
-            </div>
             <div onClick = {() => {setSignState("Log In")}} className="signUp" >Already Have An Accout?</div>
             </>
             }

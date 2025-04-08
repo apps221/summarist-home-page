@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../assets/logo.png'
+import Modal from './Modal'
 
 const Navbar = () => {
+  const [NavModalOpen, setNavModalOpen] = useState(false);
+  const closeNavModal = () => {
+    setNavModalOpen(false);
+  }
+
+           
   return (
     <nav class="nav">
       <div class="nav__wrapper">
@@ -9,7 +16,8 @@ const Navbar = () => {
           <img class="nav__img" src={logo} alt="logo" />
         </figure>
         <ul class="nav__list--wrapper">
-          <li class="nav__list nav__list--login">Login</li>
+          <li class="nav__list nav__list--login" onClick={()=> setNavModalOpen(true)} >Login</li>
+          {NavModalOpen && <Modal closeModal={closeNavModal}/>}
           <li class="nav__list nav__list--mobile">About</li>
           <li class="nav__list nav__list--mobile">Contact</li>
           <li class="nav__list nav__list--mobile">Help</li>
