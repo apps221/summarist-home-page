@@ -1,12 +1,22 @@
 import Home from './pages/Home';
+import Foryou from './pages/Foryou';
 import Navbar from './Components/Navbar';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './AuthContext';
 function App() {
   return (
-   <div>
+    <>
+    <AuthProvider> 
     <Navbar />
-    <Home />
-   </div>
+ <BrowserRouter>
+ <Routes>
+  <Route path = '/' element={<Home />} />
+  <Route exact path='/for-you'element={<Foryou />} />
+  </Routes>
+  </BrowserRouter>
+  </AuthProvider>
+</>
+   
   );
 }
 
