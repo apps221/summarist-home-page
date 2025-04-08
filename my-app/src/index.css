@@ -75,7 +75,7 @@ button:disabled {
   top: 0;
   left: 0;
   height: 100%;
-  background-color: rgba(0, 0, 0, .75);
+  background-color: rgba(0, 0, 0, .5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,6 +111,57 @@ button:disabled {
   left: 2px;
 }
 
+.google__icon--mask img {
+  width: 24px;
+  height: 24px;
+}
+.btn.google__btn--wrapper {
+  position: relative;
+  background-color: #4285f4;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.forgot__password {
+  text-align: center;
+  color: #116be9;
+  font-weight: 300;
+  font-size: 14px;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto 16px;
+  cursor: pointer;
+}
+.close__btn{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  cursor: pointer;
+  transition: opacity .2s;
+  font-size: 36px;
+}
+.signUp {
+  text-align: center;
+  color: #116be9;
+  font-weight: 300;
+  font-size: 14px;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto 16px;
+  cursor: pointer;
+}
+.mainInput {
+  height: 40px;
+  border: 2px solid #bac8ce;
+  border-radius: 4px;
+  color: #394547;
+  padding: 0 12px;
+}
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 .btn {
   background-color: #2bd97c;
   color: #032b41;
@@ -123,7 +174,9 @@ button:disabled {
   align-items: center;
   justify-content: center;
   min-width: 180px;
+  margin-top: 4px;
 }
+
 
 .btn:hover:not(:disabled) {
   background-color: #20ba68;

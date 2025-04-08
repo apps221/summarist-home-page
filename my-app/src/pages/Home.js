@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AiFillAudio, AiFillBulb, AiFillFileText } from 'react-icons/ai'
 import { BiCrown } from 'react-icons/bi'
 import { BsStarFill, BsStarHalf } from 'react-icons/bs'
 import { RiLeafLine } from 'react-icons/ri'
 import landing from '../assets/landing.png'
+import Modal from '../Components/Modal'
 
 const Home = () => {
+    const [modalOpen, setModalOpen] = useState('false');
   return (
  <>
     <section id="landing">
@@ -24,7 +26,8 @@ const Home = () => {
                 <br class="remove--tablet" />
                 and even people who don’t like to read.
               </div>
-              <button class="btn home__cta--btn">Login</button>
+              <button class="btn home__cta--btn" onClick={()=> setModalOpen(true)}>Login</button>
+              {modalOpen && <Modal />}
             </div>
             <figure class="landing__image--mask">
               <img src={landing} alt="landing" />
@@ -202,7 +205,8 @@ const Home = () => {
             </div>
           </div>
           <div class="reviews__btn--wrapper">
-            <button class="btn home__cta--btn">Login</button>
+            <button class="btn home__cta--btn" onClick={()=> setModalOpen(true)}>Login</button>
+            {modalOpen && <Modal />}
           </div>
         </div>
       </div>
