@@ -7,8 +7,8 @@ function App() {
   return (
     <>
     <AuthProvider> 
+    <BrowserRouter>
     <Navbar />
- <BrowserRouter>
  <Routes>
   <Route path = '/' element={<Home />} />
   <Route exact path='/for-you'element={<Foryou />} />
