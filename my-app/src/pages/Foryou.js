@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuth } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
-const navigate= useNavigate();
 
 const Foryou = () => {
+  const navigate= useNavigate();
     const { currentUser } = useAuth();
+    useEffect(()=> {
+      if (!currentUser) {
+        navigate('/')
+      }
+    }, [currentUser, navigate])
 
     return (
         <div>
-            {currentUser ? (
+            {currentUser && (
                 <div>
                     Logged In As: {currentUser.email}
                 </div>
-            ) : (
-                navigate('/')
             )}
         </div>
     );
