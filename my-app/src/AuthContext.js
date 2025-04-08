@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const value = {
-        currentUser,
+        currentUser
     };
 
     return (
