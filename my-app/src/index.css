@@ -68,6 +68,7 @@ button:disabled {
   border-radius: 8px;
   width: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  
 }
 .auth__wrapper {
   width: 100%;
@@ -79,6 +80,7 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 .auth__title {
   text-align: center;
@@ -89,6 +91,7 @@ button:disabled {
 }
 .auth__content {
   padding: 48px 32px 24px;
+  
 }
 .btn.guest__btn--wrapper {
   position: relative;

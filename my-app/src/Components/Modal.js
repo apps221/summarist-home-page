@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { VscAccount } from "react-icons/vsc";
 import google from '../assets/google.png'
 import { IoIosClose } from "react-icons/io";
-const Modal = () => {
+const Modal = ({closeModal}) => {
   const [signState, setSignState] = useState('Log In')
   return (
     <div className="auth__wrapper">
@@ -31,7 +31,7 @@ const Modal = () => {
               </input>
               <button class="btn">Login</button>
             </form><div className="forgot__password">Forgot Password?</div> 
-            <div className="close__btn">
+            <div className="close__btn" onClick={closeModal}>
             <IoIosClose />
             </div>
             <div onClick = {() => {setSignState("Sign Up")}} className="signUp" >Sign Up</div></> : 
@@ -52,7 +52,7 @@ const Modal = () => {
               </input>
               <button class="btn">Sign Up</button>
             </form>
-            <div className="close__btn">
+            <div className="close__btn" onClick={closeModal}>
             <IoIosClose />
             </div>
             <div onClick = {() => {setSignState("Log In")}} className="signUp" >Already Have An Accout?</div>

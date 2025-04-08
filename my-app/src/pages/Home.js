@@ -8,6 +8,9 @@ import Modal from '../Components/Modal'
 
 const Home = () => {
     const [modalOpen, setModalOpen] = useState('false');
+    const closeModal = () => {
+      setModalOpen(false);
+    }
   return (
  <>
     <section id="landing">
@@ -27,7 +30,7 @@ const Home = () => {
                 and even people who don’t like to read.
               </div>
               <button class="btn home__cta--btn" onClick={()=> setModalOpen(true)}>Login</button>
-              {modalOpen && <Modal />}
+              {modalOpen && <Modal closeModal={closeModal}/>}
             </div>
             <figure class="landing__image--mask">
               <img src={landing} alt="landing" />
@@ -206,7 +209,7 @@ const Home = () => {
           </div>
           <div class="reviews__btn--wrapper">
             <button class="btn home__cta--btn" onClick={()=> setModalOpen(true)}>Login</button>
-            {modalOpen && <Modal />}
+            {modalOpen && <Modal closeModal={closeModal}/>}
           </div>
         </div>
       </div>
