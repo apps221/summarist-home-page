@@ -21,7 +21,6 @@ const Modal = ({closeModal}) => {
  const signInGuest = async () => {
   signInAnonymously (auth)
   .then(() => {
-   
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -33,7 +32,10 @@ const Modal = ({closeModal}) => {
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
       console.log('Google Sign In Success:', result.user);
+      console.log("Token: ", token)
     } catch (error) {
       console.error('Google Sign In Error:', error.message);
       alert('Google Sign In Failed: ' + error.message);
