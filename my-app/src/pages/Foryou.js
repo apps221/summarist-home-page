@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import { useAuth } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
 
+
 const Foryou = () => {
+  
   const navigate= useNavigate();
     const { currentUser } = useAuth();
     useEffect(()=> {

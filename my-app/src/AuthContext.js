@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     const value = {
         currentUser
     };
-
+//if not loading then it will return the children, aka the <App>
     return (
         <AuthContext.Provider value={value}>
             {!loading && children}
