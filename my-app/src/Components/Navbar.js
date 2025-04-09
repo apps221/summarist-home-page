@@ -3,6 +3,7 @@ import logo from '../assets/logo.png'
 import Modal from './Modal'
 import { useAuth } from '../AuthContext';
 import { getAuth, signOut } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [NavModalOpen, setNavModalOpen] = useState(false);
@@ -28,9 +29,11 @@ const Navbar = () => {
   return (
     <nav class="nav">
       <div class="nav__wrapper">
+        <Link to ='/'>
         <figure class="nav__img--mask">
           <img class="nav__img" src={logo} alt="logo" />
         </figure>
+        </Link>
         <ul class="nav__list--wrapper">
           {currentUser === null ?  <><li class="nav__list nav__list--login" onClick={()=> setNavModalOpen(true)} >Login</li>
           {NavModalOpen && <Modal closeModal={closeNavModal}/>}</>: 

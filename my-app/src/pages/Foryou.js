@@ -7,6 +7,7 @@ const Foryou = () => {
   
   const navigate= useNavigate();
     const { currentUser } = useAuth();
+  console.log(currentUser);
     useEffect(()=> {
       if (!currentUser) {
         navigate('/')
@@ -16,8 +17,8 @@ const Foryou = () => {
     return (
         <div>
             {currentUser && (
-                <div>
-                    Logged In As: {currentUser.email}
+                <div className='loggedInAs'>
+                  Logged In As: {currentUser.email || "Guest"}
                 </div>
             )}
         </div>

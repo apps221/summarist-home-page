@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { VscAccount } from "react-icons/vsc";
 import google from '../assets/google.png'
 import { IoIosClose } from "react-icons/io";
 import { auth } from '../firebase';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInAnonymously, signInWithEmailAndPassword, signInWithPopup} from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, sendPasswordResetEmail, signInAnonymously, signInWithEmailAndPassword, signInWithPopup} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 
@@ -17,10 +17,39 @@ const Modal = ({closeModal}) => {
   const [password, setPassword] = useState('')
   const navigate= useNavigate();
   const {currentUser} = useAuth();
+  const modalRef = useRef(null);
+useEffect(() => {
+    // Close the modal if the user clicks outside
+    const handleOutsideClick = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        closeModal();
+      }
+    };
+
+    // Add the event listener when the modal is open
+    document.addEventListener('click', handleOutsideClick);
+
+    // Clean up the event listener when the component unmounts or modal is closed
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, [closeModal]);
+  const passwordReset = async () => {
+    sendPasswordResetEmail(auth, email)
+  .then(() => {
+    alert("Password reset email sent!")
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+  }
 
  const signInGuest = async () => {
   signInAnonymously (auth)
   .then(() => {
+    navigate('/for-you');
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -34,6 +63,7 @@ const Modal = ({closeModal}) => {
       try {
         const result = await signInWithPopup(auth, googleProvider)
         console.log(result.user)
+        navigate('/for-you');
       } catch (error) {
         console.log(error)
     }
@@ -73,7 +103,7 @@ const Modal = ({closeModal}) => {
   }, [currentUser, navigate])
   return (
     <div className="auth__wrapper">
-    <div className="auth">
+    <div className="auth" ref={modalRef}>
         <div className="auth__content">
         <div className="close__btn" onClick={closeModal}>
             <IoIosClose />
@@ -100,7 +130,7 @@ const Modal = ({closeModal}) => {
               <input class="mainInput" type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}>
               </input>
               <button type="submit" class="btn">Login</button>
-            </form><div className="forgot__password">Forgot Password?</div> 
+            </form><div onClick={passwordReset} className="forgot__password">Forgot Password?</div> 
             <div onClick = {() => {setSignState("Sign Up")}} className="signUp" >Sign Up</div></> : 
             
             <>

@@ -5,9 +5,11 @@ import { BsStarFill, BsStarHalf } from 'react-icons/bs'
 import { RiLeafLine } from 'react-icons/ri'
 import landing from '../assets/landing.png'
 import Modal from '../Components/Modal'
+import { useAuth } from '../AuthContext'
+
 
 const Home = () => {
-
+ const { currentUser } = useAuth();
   const [modalOpenLanding, setModalOpenLanding] = useState(false);
     const [modalOpenReviews, setModalOpenReviews] = useState(false);
 
@@ -36,8 +38,14 @@ const Home = () => {
                 <br class="remove--tablet" />
                 and even people who don’t like to read.
               </div>
-              <button class="btn home__cta--btn" onClick={()=> setModalOpenLanding(true)}>Login</button>
-              {modalOpenLanding && <Modal closeModal={closeModalLanding}/>}
+              {!currentUser && (
+                  <>
+                    <button className="btn home__cta--btn" onClick={() => setModalOpenLanding(true)}>
+                      Login
+                    </button>
+                    {modalOpenLanding && <Modal closeModal={closeModalLanding} />}
+                  </>
+                )}     
             </div>
             <figure class="landing__image--mask">
               <img src={landing} alt="landing" />
@@ -215,8 +223,9 @@ const Home = () => {
             </div>
           </div>
           <div class="reviews__btn--wrapper">
-            <button class="btn home__cta--btn" onClick={()=> setModalOpenReviews(true)}>Login</button>
-            {modalOpenReviews && <Modal closeModal={closeModalReviews}/>}
+          {!currentUser &&  <><button class="btn home__cta--btn" onClick={()=> setModalOpenReviews(true)}>Login</button>
+            {modalOpenReviews && <Modal closeModal={closeModalReviews}/>}</>}
+           
           </div>
         </div>
       </div>
