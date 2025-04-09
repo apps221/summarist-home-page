@@ -17,6 +17,26 @@ const Modal = ({closeModal}) => {
   const [password, setPassword] = useState('')
   const navigate= useNavigate();
   const {currentUser} = useAuth();
+  const modalRef = useRef();
+
+  useEffect(() => {
+    let isFirstClick=true;
+    const handleOutsideClick = (event) => {
+ 
+      if (isFirstClick) {
+        isFirstClick= false;
+        return;
+      }
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        closeModal(); // Close the modal when clicking outside
+      }
+    };
+    document.addEventListener('click', handleOutsideClick);
+  
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, [closeModal]); // Only run the effect when isModalOpen changes
 
   const passwordReset = async () => {
    await sendPasswordResetEmail(auth, email)
@@ -26,6 +46,7 @@ const Modal = ({closeModal}) => {
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
+    alert(errorMessage)
     // ..
   });
   }
@@ -88,7 +109,7 @@ const Modal = ({closeModal}) => {
   
   return (
     <div className="auth__wrapper">
-    <div className="auth">
+    <div className="auth" ref={modalRef}>
         <div className="auth__content">
         <div className="close__btn" onClick={closeModal}>
             <IoIosClose />
@@ -97,42 +118,42 @@ const Modal = ({closeModal}) => {
           <>
           <div className="auth__title">Log in to Summarist</div>
             <button onClick={signInGuest} className="btn guest__btn--wrapper">
-                <figure class="google__icon--mask">
+                <figure className="google__icon--mask">
                 <VscAccount />
                 </figure>
                 <div>Login as Guest</div>
             </button>
             <button onClick={signInWithGoogle} className="btn google__btn--wrapper">
-                <figure class="google__icon--mask">
+                <figure className="google__icon--mask">
                 <img src={google} alt=""/>
                 </figure>
                 <div>Login as Google</div>
             </button>
-            <form onSubmit={signIn} class="loginForm">
+            <form onSubmit={signIn} className="loginForm">
               
-              <input class="mainInput" type="text" placeholder='Email Address' value={email} onChange={(e) => setEmail(e.target.value)}>
+              <input className="mainInput" type="text" placeholder='Email Address' value={email} onChange={(e) => setEmail(e.target.value)}>
               </input>
-              <input class="mainInput" type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}>
+              <input className="mainInput" type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}>
               </input>
-              <button type="submit" class="btn">Login</button>
+              <button type="submit" className="btn">Login</button>
             </form><div onClick={passwordReset} className="forgot__password">Forgot Password?</div> 
             <div onClick = {() => {setSignState("Sign Up")}} className="signUp" >Sign Up</div></> : 
             
             <>
             <div className="auth__title">Sign Up</div>
             <button className="btn google__btn--wrapper">
-            <figure class="google__icon--mask">
+            <figure className="google__icon--mask">
             <img src={google} alt=""/>
             </figure>
             <div>Sign Up With Google</div>
         </button>
-          <form onSubmit={signUp} class="loginForm">
+          <form onSubmit={signUp} className="loginForm">
               
-              <input class="mainInput" type="text" placeholder='Email Address'value = {email} onChange={(e)=> setEmail(e.target.value)}>
+              <input className="mainInput" type="text" placeholder='Email Address'value = {email} onChange={(e)=> setEmail(e.target.value)}>
               </input>
-              <input class="mainInput" type="password" placeholder='Password'value={password} onChange={(e) => setPassword(e.target.value)}>
+              <input className="mainInput" type="password" placeholder='Password'value={password} onChange={(e) => setPassword(e.target.value)}>
               </input>
-              <button type="submit"class="btn">Sign Up</button>
+              <button type="submit"className="btn">Sign Up</button>
             </form>
             <div onClick = {() => {setSignState("Log In")}} className="signUp" >Already Have An Accout?</div>
             </>
