@@ -3,9 +3,10 @@ import { VscAccount } from "react-icons/vsc";
 import google from '../assets/google.png'
 import { IoIosClose } from "react-icons/io";
 import { auth } from '../firebase';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import { provider } from '../AuthContext';
 //Email: guest@gmail.com
 //Password: guest123
 
@@ -15,8 +16,28 @@ const Modal = ({closeModal}) => {
   const [password, setPassword] = useState('')
   const navigate= useNavigate();
   const {currentUser} = useAuth();
+  const signInWithGoogle = (e) => {
+    signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
 
-  
+  }
   const signIn = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
@@ -69,7 +90,7 @@ const Modal = ({closeModal}) => {
                 <figure class="google__icon--mask">
                 <img src={google} alt=""/>
                 </figure>
-                <div>Login as Google</div>
+                <div onClick={signInWithGoogle}>Login as Google</div>
             </button>
             <form onSubmit={signIn} class="loginForm">
               

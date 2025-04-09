@@ -32,7 +32,7 @@ const Navbar = () => {
           <img class="nav__img" src={logo} alt="logo" />
         </figure>
         <ul class="nav__list--wrapper">
-          {!currentUser ?  <><li class="nav__list nav__list--login" onClick={()=> setNavModalOpen(true)} >Login</li>
+          {currentUser === null ?  <><li class="nav__list nav__list--login" onClick={()=> setNavModalOpen(true)} >Login</li>
           {NavModalOpen && <Modal closeModal={closeNavModal}/>}</>: 
           <li class="nav__list nav__list--login" onClick={()=> handleLogout()}>Sign Out</li>
           }

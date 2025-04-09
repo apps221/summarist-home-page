@@ -4,13 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './AuthContext';
+import { GoogleAuthProvider } from 'firebase/auth';
 
+const CLIENT_ID = "325993056792-47247cb348avodbeq6d8nsq1g3p94kle.apps.googleusercontent.com"
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <GoogleAuthProvider clientId = {CLIENT_ID}>
     <AuthProvider>
     <App />
 </AuthProvider>
+</GoogleAuthProvider>
   </React.StrictMode>
 );
 
