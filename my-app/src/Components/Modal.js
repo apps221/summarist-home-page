@@ -17,25 +17,9 @@ const Modal = ({closeModal}) => {
   const [password, setPassword] = useState('')
   const navigate= useNavigate();
   const {currentUser} = useAuth();
-  const modalRef = useRef(null);
-useEffect(() => {
-    // Close the modal if the user clicks outside
-    const handleOutsideClick = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        closeModal();
-      }
-    };
 
-    // Add the event listener when the modal is open
-    document.addEventListener('click', handleOutsideClick);
-
-    // Clean up the event listener when the component unmounts or modal is closed
-    return () => {
-      document.removeEventListener('click', handleOutsideClick);
-    };
-  }, [closeModal]);
   const passwordReset = async () => {
-    sendPasswordResetEmail(auth, email)
+   await sendPasswordResetEmail(auth, email)
   .then(() => {
     alert("Password reset email sent!")
   })
@@ -101,9 +85,10 @@ useEffect(() => {
       navigate('/for-you')
     }
   }, [currentUser, navigate])
+  
   return (
     <div className="auth__wrapper">
-    <div className="auth" ref={modalRef}>
+    <div className="auth">
         <div className="auth__content">
         <div className="close__btn" onClick={closeModal}>
             <IoIosClose />
