@@ -7,6 +7,7 @@ import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWith
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import { provider } from '../AuthContext';
+
 //Email: guest@gmail.com
 //Password: guest123
 
@@ -16,28 +17,16 @@ const Modal = ({closeModal}) => {
   const [password, setPassword] = useState('')
   const navigate= useNavigate();
   const {currentUser} = useAuth();
-  const signInWithGoogle = (e) => {
-    signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-  });
 
-  }
+  const signInWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      console.log('Google Sign In Success:', result.user);
+    } catch (error) {
+      console.error('Google Sign In Error:', error.message);
+      alert('Google Sign In Failed: ' + error.message);
+    }
+  };
   const signIn = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
@@ -86,11 +75,11 @@ const Modal = ({closeModal}) => {
                 </figure>
                 <div>Login as Guest</div>
             </button>
-            <button className="btn google__btn--wrapper">
+            <button onClick={signInWithGoogle} className="btn google__btn--wrapper">
                 <figure class="google__icon--mask">
                 <img src={google} alt=""/>
                 </figure>
-                <div onClick={signInWithGoogle}>Login as Google</div>
+                <div>Login as Google</div>
             </button>
             <form onSubmit={signIn} class="loginForm">
               

@@ -1,11 +1,11 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { auth } from './firebase'; 
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { GoogleAuthProvider } from "firebase/auth";
+import { onAuthStateChanged, GoogleAuthProvider } from 'firebase/auth';
+
 
 export const provider = new GoogleAuthProvider();
+
 const AuthContext = createContext();
-auth.languageCode = auth.useDeviceLanguage();
 
 export const useAuth = () => {
     return useContext(AuthContext);
