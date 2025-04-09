@@ -3,7 +3,7 @@ import { VscAccount } from "react-icons/vsc";
 import google from '../assets/google.png'
 import { IoIosClose } from "react-icons/io";
 import { auth } from '../firebase';
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInAnonymously, signInWithEmailAndPassword, signInWithPopup} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import { provider } from '../AuthContext';
@@ -18,6 +18,18 @@ const Modal = ({closeModal}) => {
   const navigate= useNavigate();
   const {currentUser} = useAuth();
 
+ const signInGuest = async () => {
+  signInAnonymously (auth)
+  .then(() => {
+   
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ...
+  });  
+}
+   
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
@@ -27,6 +39,7 @@ const Modal = ({closeModal}) => {
       alert('Google Sign In Failed: ' + error.message);
     }
   };
+
   const signIn = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
@@ -69,7 +82,7 @@ const Modal = ({closeModal}) => {
           {signState==="Log In" ?
           <>
           <div className="auth__title">Log in to Summarist</div>
-            <button className="btn guest__btn--wrapper">
+            <button onClick={signInGuest} className="btn guest__btn--wrapper">
                 <figure class="google__icon--mask">
                 <VscAccount />
                 </figure>
