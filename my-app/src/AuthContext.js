@@ -3,7 +3,7 @@ import { auth } from './firebase';
 import { onAuthStateChanged, GoogleAuthProvider, getAuth } from 'firebase/auth';
 
 
-export const provider = new GoogleAuthProvider();
+
 
 const AuthContext = createContext();
 

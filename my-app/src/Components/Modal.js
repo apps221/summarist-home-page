@@ -6,7 +6,7 @@ import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInAnonymously, signInWithEmailAndPassword, signInWithPopup} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
-import { provider } from '../AuthContext';
+
 
 //Email: guest@gmail.com
 //Password: guest123
@@ -30,15 +30,12 @@ const Modal = ({closeModal}) => {
 }
    
   const signInWithGoogle = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      console.log('Google Sign In Success:', result.user);
-      console.log("Token: ", token)
-    } catch (error) {
-      console.error('Google Sign In Error:', error.message);
-      alert('Google Sign In Failed: ' + error.message);
+    const googleProvider = new GoogleAuthProvider();
+      try {
+        const result = await signInWithPopup(auth, googleProvider)
+        console.log(result.user)
+      } catch (error) {
+        console.log(error)
     }
   };
 
